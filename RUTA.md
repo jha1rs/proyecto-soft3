@@ -156,7 +156,7 @@ Crear el plan en la carpeta `jmeter/` (por ejemplo `jmeter/plan-catalogo.jmx`) c
 - Variables `HOST` y `PORT` para no editar el plan en cada escenario
 - Dos peticiones:
   - `GET /api/libros?page=${__Random(0,499)}&size=20`
-  - `GET /api/libro/${__groovy("979" + String.format("%010d"\\, new Random().nextInt(10000) + 1))}` (arma un ISBN aleatorio entre 9790000000001 y 9790000010000)
+  - `GET /api/libro/${__groovy("979" + String.format("%010d"\, new Random().nextInt(10000) + 1))}` (arma un ISBN aleatorio entre 9790000000001 y 9790000010000)
 - Varios niveles de carga, por ejemplo 10, 50, 100 y 200 usuarios concurrentes
 - Un periodo de subida (ramp-up) y una duración fija por prueba, por ejemplo 2 minutos
 - Guardar resultados en CSV
