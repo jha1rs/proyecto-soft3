@@ -11,8 +11,8 @@ services:
       - "3306:3306"
     volumes:
       - mysql-catalog-data:/var/lib/mysql
-      # Todos los .sql de db/ se ejecutan en orden alfabetico la primera vez
-      # (01-catalog-script.sql, luego 02-datos-10k.sql)
+      # Todo .sql de db/ se ejecuta la primera vez que se crea el volumen
+      # (db/init.sql: crea la tabla y genera los 10K libros)
       - ../db:/docker-entrypoint-initdb.d:ro
     networks:
       - bookstore-network

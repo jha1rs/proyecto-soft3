@@ -1,8 +1,18 @@
--- Genera 10.000 libros de prueba dentro de MySQL (sin listar cada INSERT).
--- El mismo script se usa en Docker Compose y en Kubernetes, asi los datos son identicos.
--- ISBN 9790000000001 .. 9790000010000 (no chocan con los libros del script 01).
+-- Inicializacion completa de la base del catalogo: crea la base, la tabla Book
+-- y genera 10.000 libros de prueba (ISBN 9790000000001 .. 9790000010000).
+-- Lo usan Docker Compose (montando db/) y Kubernetes (ConfigMap mysql-catalog-init).
 
+CREATE DATABASE IF NOT EXISTS `catalog-library`;
 USE `catalog-library`;
+
+CREATE TABLE IF NOT EXISTS Book (
+    titulo VARCHAR(60),
+    ISBN VARCHAR(60) PRIMARY KEY,
+    autor VARCHAR(60),
+    descripcion VARCHAR(250),
+    valor VARCHAR(60),
+    unidades INT
+);
 
 SET SESSION cte_max_recursion_depth = 10001;
 
