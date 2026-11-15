@@ -1,0 +1,56 @@
+services:
+  mysql-catalog:
+    image: mysql:8.0
+    container_name: mysql-catalog
+    environment:
+      MYSQL_DATABASE: catalog-library
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: catalog
+      MYSQL_PASSWORD: catalog
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-catalog-data:/var/lib/mysql
+      # Todos los .sql de db/ se ejecutan en orden alfabetico la primera vez
+      # (01-catalog-script.sql, luego 02-datos-10k.sql)
+      - ../db:/docker-entrypoint-initdb.d:ro
+    networks:
+      - bookstore-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    command: --default-authentication-plugin=mysql_native_password
+
+  backend-catalog:
+    build:
+      context: ../app/backend-catalog
+      dockerfile: Dockerfile
+    container_name: backend-catalog
+    environment:
+      MYSQL_DB_HOST: mysql-catalog
+      MYSQL_DB_PORT: 3306
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: password
+    ports:
+      - "8081:8081"
+    networks:
+      - bookstore-network
+    depends_on:
+      mysql-catalog:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8081/api/getlibros"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  mysql-catalog-data:
+
+networks:
+  bookstore-network:
+    driver: bridge
