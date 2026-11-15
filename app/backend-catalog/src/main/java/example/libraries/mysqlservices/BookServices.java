@@ -3,6 +3,8 @@ package example.libraries.mysqlservices;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,22 @@ public class BookServices implements IbookService {
     @Transactional(readOnly = true)
     public List<Book> GetAll() {
         return (List<Book>) repo.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Book> getPage(int page, int size) {
+        return repo.findAll(PageRequest.of(page, size, Sort.by("ISBN"))).getContent();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Book getByIsbn(String isbn) {
+        Book book = repo.findBookByISBN(isbn);
+        if (book == null) {
+            throw new BookNotFoundException(isbn);
+        }
+        return book;
     }
 
 //    @Override

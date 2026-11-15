@@ -26,6 +26,22 @@ public class CatalogController {
         return new ResponseEntity<List<Book>>(booksList, HttpStatus.OK);
     }
 
+    // Listado paginado: GET /api/libros?page=0&size=20 (size maximo 100)
+    @GetMapping("/libros")
+    public ResponseEntity<List<Book>> getLibrosPaginados(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "20") int size) {
+        int pagina = Math.max(page, 0);
+        int tamano = Math.min(Math.max(size, 1), 100);
+        return new ResponseEntity<List<Book>>(service.getPage(pagina, tamano), HttpStatus.OK);
+    }
+
+    // Consulta de un libro: GET /api/libro/9790000000001
+    @GetMapping("/libro/{isbn}")
+    public ResponseEntity<Book> getLibro(@PathVariable("isbn") String isbn) {
+        return new ResponseEntity<Book>(service.getByIsbn(isbn), HttpStatus.OK);
+    }
+
 //    @PostMapping("/agregarlibro")
 //    public ResponseEntity<?> PostLibrary(@RequestParam(value = "titulo") String titulo,
 //            @RequestParam(value = "ISBN") String iSBN, @RequestParam(value = "autor") String autor,
