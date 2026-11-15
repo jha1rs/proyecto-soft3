@@ -4,9 +4,9 @@ metadata:
   name: mysql-catalog-deployment
   namespace: library-ns
   labels:
-    app: mongo
+    app: mysql-catalog
 spec:
-  replicas: 1
+  replicas: 1   # La base NO se escala; solo se escala el backend
   selector:
     matchLabels:
       app: mysql-catalog
@@ -25,29 +25,41 @@ spec:
             value: password
           - name: MYSQL_DATABASE
             value: catalog-library
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+        readinessProbe:
+          exec:
+            command: ["mysql", "-uroot", "-ppassword", "-e", "SELECT COUNT(*) FROM `catalog-library`.Book"]
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        volumeMounts:
+          - name: init-scripts
+            mountPath: /docker-entrypoint-initdb.d
+            readOnly: true
+          - name: mysql-data
+            mountPath: /var/lib/mysql
+      volumes:
+        - name: init-scripts
+          configMap:
+            name: mysql-catalog-init
+        # Datos efimeros a proposito: si el pod se reinicia, MySQL arranca vacio y
+        # vuelve a ejecutar los scripts, asi los 10K libros siempre quedan cargados.
+        - name: mysql-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql-catalog-service
-  namespace: library-ns  
+  namespace: library-ns
 spec:
   type: ClusterIP
-  selector:
-    app: mysql-catalog
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-# microk8s kubectl port-forward -n library-ns service/mysql-catalog-service 13306:3306
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-catalog-ext-service
-  namespace: library-ns    
-spec:
-  type: NodePort
   selector:
     app: mysql-catalog
   ports:
