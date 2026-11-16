@@ -33,9 +33,9 @@ USER appuser
 
 EXPOSE 8081
 
-# Health check: endpoint GET /api/getlibros
+# Health check: endpoint GET /api/libros?size=1
 HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \
-  CMD wget -q --spider http://localhost:8081/api/getlibros || exit 1
+  CMD wget -q --spider "http://localhost:8081/api/libros?size=1" || exit 1
 
 # Vars por defecto (sobrescribir en deploy)
 ENV MYSQL_DB_HOST=mysql-catalog
