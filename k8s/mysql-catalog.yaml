@@ -15,6 +15,10 @@ spec:
       labels:
         app: mysql-catalog
     spec:
+      # MySQL siempre en vm1, para que la base no cambie de nodo entre escenarios.
+      # Verificar el nombre real con: kubectl get nodes
+      nodeSelector:
+        kubernetes.io/hostname: vm1
       containers:
       - name: mysql
         image: mysql:8.0.27
