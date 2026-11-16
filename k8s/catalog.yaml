@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: catalog-backend-deployment
-  namespace: library-ns  
+  namespace: library-ns
   labels:
     app: catalog-backend
 spec:
@@ -15,9 +15,17 @@ spec:
       labels:
         app: catalog-backend
     spec:
+      # Reparte las replicas entre nodos (como maximo 1 de diferencia entre nodos)
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: catalog-backend
       containers:
       - name: catalog-backend
-        image: chaphe/backend-catalog-image:1.0
+        image: USUARIO_DOCKERHUB/backend-catalog:1.0   # cambiar por la imagen propia (Paso 4.3)
         ports:
         - containerPort: 8081
         env:
@@ -36,26 +44,31 @@ spec:
           limits:
             cpu: "500m"
             memory: "768Mi"
-        # No recibe trafico hasta que Spring arranco y responde con datos
+        # No recibe trafico hasta que Spring arranco y responde con datos.
+        # timeoutSeconds alto para que bajo carga el pod no salga del Service.
         readinessProbe:
           httpGet:
             path: /api/libros?size=1
             port: 8081
           initialDelaySeconds: 20
           periodSeconds: 5
+          timeoutSeconds: 5
           failureThreshold: 6
+        # Tolerante bajo carga para que el pod no se reinicie en plena prueba
         livenessProbe:
           httpGet:
             path: /api/libros?size=1
             port: 8081
           initialDelaySeconds: 90
           periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 6
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: catalog-backend-service
-  namespace: library-ns  
+  namespace: library-ns
 spec:
   type: NodePort
   selector:
