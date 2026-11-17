@@ -1,0 +1,23 @@
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using jmeter/plan-catalogo.jmx
+Starting standalone test @ 2026 Nov 16 16:35:05 UTC (1794846905585)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      1 in 00:00:00 =    5.7/s Avg:    41 Min:    41 Max:    41 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+summary +   3976 in 00:00:24 =  164.9/s Avg:    27 Min:     2 Max:   175 Err:     0 (0.00%) Active: 9 Started: 9 Finished: 0
+summary =   3977 in 00:00:24 =  163.7/s Avg:    27 Min:     2 Max:   175 Err:     0 (0.00%)
+summary +   5716 in 00:00:30 =  190.5/s Avg:    51 Min:     2 Max:   199 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0
+summary =   9693 in 00:00:54 =  178.5/s Avg:    41 Min:     2 Max:   199 Err:     0 (0.00%)
+summary +   5665 in 00:00:30 =  188.9/s Avg:    52 Min:     2 Max:   218 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0
+summary =  15358 in 00:01:24 =  182.2/s Avg:    45 Min:     2 Max:   218 Err:     0 (0.00%)
+summary +   6012 in 00:00:30 =  200.4/s Avg:    49 Min:     2 Max:   219 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0
+summary =  21370 in 00:01:54 =  187.0/s Avg:    46 Min:     2 Max:   219 Err:     0 (0.00%)
+summary +   6086 in 00:00:30 =  202.9/s Avg:    49 Min:     1 Max:   236 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0
+summary =  27456 in 00:02:24 =  190.3/s Avg:    47 Min:     1 Max:   236 Err:     0 (0.00%)
+summary +   1178 in 00:00:06 =  203.1/s Avg:    49 Min:     2 Max:   193 Err:     0 (0.00%) Active: 0 Started: 10 Finished: 10
+summary =  28634 in 00:02:30 =  190.8/s Avg:    47 Min:     1 Max:   236 Err:     0 (0.00%)
+Tidying up ...    @ 2026 Nov 16 16:37:35 UTC (1794847055803)
+... end of run

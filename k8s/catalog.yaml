@@ -25,7 +25,7 @@ spec:
             app: catalog-backend
       containers:
       - name: catalog-backend
-        image: USUARIO_DOCKERHUB/backend-catalog:1.0   # cambiar por la imagen propia (Paso 4.3)
+        image: mari0812/backend-catalog:1.0   # cambiar por la imagen propia
         ports:
         - containerPort: 8081
         env:

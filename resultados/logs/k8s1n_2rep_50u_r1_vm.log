@@ -1,0 +1,21 @@
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using jmeter/plan-catalogo.jmx
+Starting standalone test @ 2026 Nov 16 16:06:52 UTC (1794845212233)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   1366 in 00:00:08 =  178.7/s Avg:    36 Min:     1 Max:   189 Err:     0 (0.00%) Active: 13 Started: 13 Finished: 0
+summary +   5748 in 00:00:30 =  191.6/s Avg:   188 Min:     2 Max:   968 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =   7114 in 00:00:38 =  189.0/s Avg:   159 Min:     1 Max:   968 Err:     0 (0.00%)
+summary +   5828 in 00:00:30 =  194.3/s Avg:   256 Min:     2 Max:  1213 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =  12942 in 00:01:08 =  191.3/s Avg:   203 Min:     1 Max:  1213 Err:     0 (0.00%)
+summary +   6006 in 00:00:30 =  200.2/s Avg:   249 Min:     1 Max:  1265 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =  18948 in 00:01:38 =  194.0/s Avg:   218 Min:     1 Max:  1265 Err:     0 (0.00%)
+summary +   5834 in 00:00:30 =  194.4/s Avg:   257 Min:     1 Max:  1150 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =  24782 in 00:02:08 =  194.1/s Avg:   227 Min:     1 Max:  1265 Err:     0 (0.00%)
+summary +   4325 in 00:00:23 =  190.8/s Avg:   262 Min:     2 Max:  1072 Err:     0 (0.00%) Active: 0 Started: 50 Finished: 50
+summary =  29107 in 00:02:30 =  193.6/s Avg:   232 Min:     1 Max:  1265 Err:     0 (0.00%)
+Tidying up ...    @ 2026 Nov 16 16:09:22 UTC (1794845362676)
+... end of run
